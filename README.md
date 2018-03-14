@@ -1,4 +1,4 @@
-# Uber publisher v2 build
+# Uber publisher project
 
 ### Steps to create new subprofile buid:
 1. Copy entire directory and rename to new subprofile name.
