@@ -16,25 +16,29 @@
     "issues": "http://drupal.org/project/issues/uber_publisher",
     "source": "http://cgit.drupalcode.org/uber_publisher"
   },
-  "repositories": [
-    {
+  "repositories": {
+    "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
+      },
+    "assets": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
-  ],
+  },
   "require": {
     "composer/installers": "1.5.0",
+    "oomphinc/composer-installers-extender": "1.1.2",
     "cweagans/composer-patches": "1.6.4",
     "drupal-composer/drupal-scaffold": "2.4.0",
     "drupal/drupal-library-installer-plugin": "0.3",
     "webflo/drupal-finder": "1.1.0",
     "webmozart/path-util": "2.3.0",
-    "vardot/uber_publisher": "8.4.x-dev",
+    "vardot/uber_publisher": "8.5.x-dev",
     "drupal/views_bootstrap": "3.x-dev#ec4e7872315db6a7287014b029c3167962647588",
     "drupal/extlink": "1.x-dev#8a773a6c5519ccb167e18cc39d68551b30b0e4b3",
     "drupal/image_resize_filter": "1.x-dev#c3f4b23b02005859092aaff746b9f21b794adc58",
-    "drupal/entity_clone": "1.x-dev#9265e359bd31bda693dac9ad84ad52fe63531488",
-    "drupal/pathologic": "1.x-dev#4f9f3fdcf1e0b224c4d8650e383a769f40abf9bf",
+    "drupal/entity_clone": "1.x-dev#6d0ce053605e9aaf8412927a9b0ea8da7a9a06e5",
     "drupal/tour_ui": "1.x-dev#5cf793c071aeddea0ecd20d80b541606bfe2aff1",
     "drupal/tour_builder": "1.x-dev#d70e898949b7ec4095efb391a0dbec56d0117558",
     "drupal/l10n_client": "1.x-dev#9bf8d597732870bdca301512c71b6e5d74d48db2",
@@ -81,17 +85,34 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-8.x-4.x": "8.4.x-dev"
+      "dev-8.x-5.x": "8.5.x-dev"
     },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
     "installer-paths": {
       "docroot/core": ["drupal/core"],
       "docroot/profiles/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "docroot/libraries/{$name}": ["type:drupal-library"],
-      "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
-      "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
+      "docroot/libraries/slick": ["npm-asset/slick-carousel"],
+      "docroot/libraries/ace": ["npm-asset/ace-builds"],
+      "docroot/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
       "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
+    "drupal-libraries": {
+      "library-directory": "docroot/libraries",
+      "libraries": [
+          {"name": "dropzone","package": "npm-asset/dropzone"},
+          {"name": "blazy", "package": "npm-asset/blazy"},
+          {"name": "slick", "package": "npm-asset/slick-carousel"},
+          {"name": "ace", "package": "npm-asset/ace-builds"}
+      ]
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true
