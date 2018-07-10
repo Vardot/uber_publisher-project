@@ -1,7 +1,5 @@
 [![](https://www.drupal.org/files/styles/grid-3-2x/public/project-images/UBER-Logo-Final-2109-2015%20%281%29.png)](https://www.drupal.org/project/uber_publisher)
 
-[![Build Status](https://travis-ci.org/Vardot/uber_publisher.svg?branch=8.x-5.x)](https://travis-ci.org/Vardot/uber_publisher) Uber Publisher 8.x-5-x
-
 # Uber Publisher Project
 
 Project template for [Uber Publisher distribution](http://www.drupal.org/project/uber_publisher).
@@ -9,7 +7,12 @@ Project template for [Uber Publisher distribution](http://www.drupal.org/project
 
 ## Create an Uber Publisher project with [Composer](https://getcomposer.org/download/):
 
-# [Install with Composer](https://github.com/Vardot/uber_publisher-project)
+# Install with Composer
+
+To install the most recent stable release of Uber Publisher 8.5.x run this command:
+```
+composer create-project Vardot/uber_publisher-project:^8.5.0-alpha1 PROJECT_DIR_NAME --no-dev --no-interaction
+```
 
 To install the dev version of Uber Publisher 8.5.x run this command:
 ```
@@ -25,6 +28,8 @@ Initial building, ongoing maintenance and development.
 ## [Varbase 8.5.x Developer Guide](https://docs.varbase.vardot.com)
 
 ## [CHANGELOG for Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/CHANGELOG.md)
+
+## [TO DO](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/TODO.md)
 
 ## [General instructions on how to update Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/UPDATE.md)
 
