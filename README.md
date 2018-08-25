@@ -9,14 +9,9 @@ Project template for [Uber Publisher distribution](http://www.drupal.org/project
 
 # Install with Composer
 
-To install the most recent stable release of Uber Publisher 8.5.x run this command:
+To install the dev version of Uber Publisher 8.6.x run this command:
 ```
-composer create-project Vardot/uber_publisher-project:^8.5.0-alpha1 PROJECT_DIR_NAME --no-dev --no-interaction
-```
-
-To install the dev version of Uber Publisher 8.5.x run this command:
-```
-composer create-project vardot/uber_publisher-project:8.5.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
+composer create-project vardot/uber_publisher-project:8.6.x-dev PROJECT_DIR_NAME --stability dev --no-interaction
 ```
 
 Built using [Varbase](https://www.drupal.org/project/varbase), the base
@@ -25,13 +20,13 @@ Built using [Varbase](https://www.drupal.org/project/varbase), the base
 This distribution is sponsored and developed by [Vardot](https://www.vardot.com).
 Initial building, ongoing maintenance and development.
 
-## [Varbase 8.5.x Developer Guide](https://docs.varbase.vardot.com)
+## [Varbase 8.6.x Developer Guide](https://docs.varbase.vardot.com)
 
-## [CHANGELOG for Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/CHANGELOG.md)
+## [CHANGELOG for Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-6.x/CHANGELOG.md)
 
-## [TO DO](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/TODO.md)
+## [TO DO](https://github.com/Vardot/uber_publisher/blob/8.x-6.x/TODO.md)
 
-## [General instructions on how to update Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-5.x/UPDATE.md)
+## [General instructions on how to update Uber Publisher](https://github.com/Vardot/uber_publisher/blob/8.x-6.x/UPDATE.md)
 
 
 
