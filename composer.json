@@ -35,7 +35,7 @@
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "~1.0",
     "webmozart/path-util": "~2.0",
-    "vardot/uber_publisher": "6.x-dev",
+    "vardot/uber_publisher": "8.6.x-dev",
     "vardot/varbase-updater": "1.x-dev"
   },
   "replace": {
