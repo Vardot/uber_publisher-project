@@ -30,51 +30,24 @@
     "composer/installers": "~1.0",
     "oomphinc/composer-installers-extender": "~1.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal-composer/drupal-scaffold": "~2.0",
+    "drupal/core-composer-scaffold": "^8.8.0",
+    "drupal/core-project-message": "^8.8.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
-    "webflo/drupal-finder": "^1.1.0",
-    "webmozart/path-util": "^2.3.0",
-    "vardot/varbase": "~8.6.0",
-    "drupal/linked_field": "^1.1",
-    "drupal/sharerich": "^1.1",
-    "drupal/blocktabs": "^1.0-alpha6",
-    "drupal/social_post_twitter": "^2.0-alpha2",
-    "drupal/views_exclude_previous": "^1.0.0-rc1",
-    "drupal/fb_instant_articles": "^2.1",
-    "drupal/ads_system": "^1.0-alpha1",
-    "drupal/simple_amp": "^1.15",
-    "drupal/subpathauto": "^1.0-beta1",
-    "drupal/facets": "^1.0",
-    "lullabot/amp": "^1.1",
-    "drupal/uber_publisher_core": "6.x-dev",
-    "drupal/uber_publisher_author_profile": "6.x-dev",
-    "drupal/uber_publisher_opinion_articles": "6.x-dev",
-    "drupal/uber_publisher_ads_system": "6.x-dev",
-    "drupal/uber_publisher_breaking_news": "6.x-dev",
-    "drupal/uber_publisher_daily_cartoons": "6.x-dev",
-    "drupal/uber_publisher_in_pictures": "6.x-dev",
-    "drupal/uber_publisher_search": "6.x-dev",
-    "drupal/uber_publisher_social_post": "6.x-dev"
+    "webflo/drupal-finder": "~1.0",
+    "webmozart/path-util": "~2.0",
+    "vardot/uber_publisher": "8.2.x-dev",
+    "vardot/varbase-updater": "1.x-dev"
   },
-  "require-dev": {
-    "drupal/console": "~1.0",
-    "drush/drush": "~9.0",
-    "drupal/coder": "~8.0",
-    "drupal/drupal-extension": "~3.0",
-    "phing/phing": "~2.0",
-    "behat/behat": "~3.0",
-    "behat/mink": "~1.0",
-    "behat/mink-extension": "~2.0",
-    "behat/mink-goutte-driver": "~1.0",
-    "behat/mink-zombie-driver": "~1.0",
-    "behat/mink-selenium2-driver": "~1.0",
-    "behatch/contexts": "~3.0",
-    "emuse/behat-html-formatter": "^0.1.0"
+  "replace": {
+    "ajaxorg/ace-builds": "*"
   },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "drupal/core": "dist"
+    }
   },
   "autoload": {
     "psr-4": {
@@ -101,6 +74,43 @@
     "drupal/drupal": "*"
   },
   "extra": {
+    "drupal-scaffold": {
+      "allowed-packages": [
+        "drupal/core"
+      ],
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "drupal-core-project-message": {
+        "include-keys": ["homepage", "support"],
+        "post-create-project-cmd-message": [
+            "<bg=blue;fg=white>                                                                                   </>",
+            "<bg=blue;fg=white>  Congratulations, you’ve installed the Vardoc Project codebase                    </>",
+            "<bg=blue;fg=white>  from the Vardot/vardoc-project template!                                         </>",
+            "<bg=blue;fg=white>                                                                                   </>",
+            "",
+            "<bg=yellow;fg=black>Next steps</>:",
+
+            "  * Install the site: https://www.drupal.org/docs/8/install",
+            "  * Read the user guide: https://docs.varbase.vardot.com",
+            "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
+            "  * Join Our Slack Team for Feedback and Support:",
+            "      http://slack.varbase.vardot.com",
+            "  * Remove the plugin that prints this message:",
+            "      composer remove drupal/core-project-message"
+        ]
+    },
+    "_readme": [
+      "NOTICE: We're now using composer patches from Vardot repository to suggest",
+      "several fixes and better handling of patches in your Drupal project.",
+      "You'll notice that we have included (https://github.com/vardot/composer-patches)",
+      "in this composer.json repositories. This will replace the original",
+      "library (cweagans/composer-patches) with our own from (vardot/composer-patches).",
+      "See https://github.com/cweagans/composer-patches/pull/243 and more details",
+      "on our changes on the composer-patches package. Once our changes get merged,",
+      "we will revert to using (cweagans/composer-patches) without this override."
+    ],
     "branch-alias": {
       "dev-8.x-6.x": "8.6.x-dev"
     },
@@ -109,42 +119,41 @@
       "npm-asset"
     ],
     "installer-paths": {
-      "docroot/core": ["drupal/core"],
+      "docroot/core": ["type:drupal-core"],
       "docroot/profiles/{$name}": ["type:drupal-profile"],
       "docroot/modules/contrib/{$name}": ["type:drupal-module"],
       "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
       "docroot/libraries/slick": ["npm-asset/slick-carousel"],
       "docroot/libraries/ace": ["npm-asset/ace-builds"],
+      "docroot/libraries/masonry": ["npm-asset/masonry-layout"],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
         "type:npm-asset"
       ],
+      "docroot/modules/custom/{$name}": ["type:drupal-custom-module"],
+      "docroot/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
     },
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
-          {"name": "dropzone","package": "npm-asset/dropzone"},
-          {"name": "blazy", "package": "npm-asset/blazy"},
-          {"name": "slick", "package": "npm-asset/slick-carousel"},
-          {"name": "ace", "package": "npm-asset/ace-builds"}
+        {"name": "dropzone","package": "npm-asset/dropzone"},
+        {"name": "blazy", "package": "npm-asset/blazy"},
+        {"name": "slick", "package": "npm-asset/slick-carousel"},
+        {"name": "ace", "package": "npm-asset/ace-builds"},
+        {"name": "chartjs", "package": "bower-asset/chartjs"},
+        {"name": "c3","package": "bower-asset/c3"},
+        {"name": "d3", "package": "bower-asset/d3"},
+        {"name": "masonry", "package": "npm-asset/masonry-layout"},
+        {"name": "imagesloaded", "package": "npm-asset/imagesloaded"},
+        {"name": "swagger-ui", "package": "swagger-api/swagger-ui"}
       ]
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
        "drupal/core": "-p2"
-    },
-    "patches": {
-      "drupal/fb_instant_articles": {
-        "Issue #2912129: Fix embed YouTube, Twitter & Instagram?":
-        "https://www.drupal.org/files/issues/twitter_instagram_table_picture_transformer-2912129-7.patch"
-      },
-      "drupal/facets": {
-        "Issue #2692027: Have All link in facets":
-        "https://www.drupal.org/files/issues/2018-06-09/2692027-78.patch"
-      }
     }
   }
 }
