@@ -78,6 +78,9 @@
     "drupal/drupal-extension": "^3.2",
     "emuse/behat-html-formatter": "^0.2.0"
   },
+  "replace": {
+    "ajaxorg/ace-builds": "*"
+  },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
@@ -92,31 +95,50 @@
     }
   },
   "scripts": {
-    "pre-install-cmd": [
-      "Varbase\\composer\\ScriptHandler::checkComposerVersion"
-    ],
-    "pre-update-cmd": [
-      "Varbase\\composer\\ScriptHandler::checkComposerVersion"
-    ],
     "post-install-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories",
-      "./bin/phing push"
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
     "post-update-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories",
-      "./bin/phing push"
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
     ],
     "post-drupal-scaffold-cmd": [
       "Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure",
-      "UberPublisher\\composer\\UberPublisherScriptHandler::postDrupalScaffoldSubProfileProcedure"
+      "Vardoc\\composer\\ScriptHandler::postDrupalScaffoldSubProfileProcedure"
     ]
   },
   "conflict": {
     "drupal/drupal": "*"
   },
   "extra": {
+    "drupal-scaffold": {
+      "allowed-packages": [
+        "drupal/core"
+      ],
+      "locations": {
+        "web-root": "docroot/"
+      }
+    },
+    "drupal-core-project-message": {
+      "include-keys": ["homepage", "support"],
+      "post-create-project-cmd-message": [
+          "<bg=blue;fg=white>                                                                                   </>",
+          "<bg=blue;fg=white>  Congratulations, you’ve installed the UberPublisher Project codebase             </>",
+          "<bg=blue;fg=white>  from the Vardot/uber_publisher-project template!                                 </>",
+          "<bg=blue;fg=white>                                                                                   </>",
+          "",
+          "<bg=yellow;fg=black>Next steps</>:",
+
+          "  * Install the site: https://www.drupal.org/docs/8/install",
+          "  * Read the user guide: https://docs.varbase.vardot.com",
+          "  * Get support: https://www.vardot.com/en/form/get-support-varbase",
+          "  * Join Our Slack Team for Feedback and Support:",
+          "      http://slack.varbase.vardot.com",
+          "  * Remove the plugin that prints this message:",
+          "      composer remove drupal/core-project-message"
+      ]
+  },
     "branch-alias": {
       "7.0.x": "7.0.x-dev"
     },
