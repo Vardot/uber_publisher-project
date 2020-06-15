@@ -54,7 +54,7 @@
     "drupal/uber_publisher_daily_cartoons": "6.x-dev",
     "drupal/uber_publisher_in_pictures": "^7.0",
     "drupal/uber_publisher_search": "^7.0",
-    "drupal/uber_publisher_social_post": "^7.0",
+    "drupal/uber_publisher_social_post": "6.x-dev",
     "drupal/uber_publisher_indepth": "^7.0",
     "drupal/uber_publisher_video": "^7.0",
     "bower-asset/objectfitpolyfill": "~2.0",
