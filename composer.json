@@ -106,7 +106,7 @@
     ],
     "post-drupal-scaffold-cmd": [
       "Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure",
-      "Vardoc\\composer\\ScriptHandler::postDrupalScaffoldSubProfileProcedure"
+      "UberPublisher\\composer\\ScriptHandler::postDrupalScaffoldSubProfileProcedure"
     ]
   },
   "conflict": {
