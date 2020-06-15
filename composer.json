@@ -46,6 +46,7 @@
     "drupal/subpathauto": "^1.0",
     "drupal/facets": "^1.4",
     "lullabot/amp": "^1.1",
+    "drupal/uber_publisher": "^7.0",
     "drupal/uber_publisher_core": "^7.0",
     "drupal/uber_publisher_author_profile": "^7.0",
     "drupal/uber_publisher_opinion_articles": "^7.0",
