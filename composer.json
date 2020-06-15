@@ -30,51 +30,61 @@
     "composer/installers": "~1.0",
     "oomphinc/composer-installers-extender": "~1.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal-composer/drupal-scaffold": "~2.0",
+    "drupal/core-composer-scaffold": "^8.8.0",
     "drupal/drupal-library-installer-plugin": "^0.3",
     "webflo/drupal-finder": "^1.1.0",
     "webmozart/path-util": "^2.3.0",
-    "vardot/varbase": "~8.6.0",
-    "drupal/linked_field": "^1.1",
-    "drupal/sharerich": "^1.1",
-    "drupal/blocktabs": "^1.0-alpha6",
-    "drupal/social_post_twitter": "^2.0-alpha2",
+    "vardot/varbase": "~8.8.0",
+    "drupal/linked_field": "^1.3",
+    "drupal/sharerich": "^1.2",
+    "drupal/blocktabs": "^1.0-beta3",
+    "drupal/social_post_twitter": "^2.0-alpha4",
     "drupal/views_exclude_previous": "^1.0.0-rc1",
-    "drupal/fb_instant_articles": "^2.1",
+    "drupal/fb_instant_articles": "^2.2",
     "drupal/ads_system": "^1.0-alpha1",
-    "drupal/simple_amp": "^1.15",
-    "drupal/subpathauto": "^1.0-beta1",
-    "drupal/facets": "^1.0",
+    "drupal/simple_amp": "^1.18",
+    "drupal/subpathauto": "^1.0",
+    "drupal/facets": "^1.4",
     "lullabot/amp": "^1.1",
-    "drupal/uber_publisher_core": "6.x-dev",
-    "drupal/uber_publisher_author_profile": "6.x-dev",
-    "drupal/uber_publisher_opinion_articles": "6.x-dev",
-    "drupal/uber_publisher_ads_system": "6.x-dev",
-    "drupal/uber_publisher_breaking_news": "6.x-dev",
+    "drupal/uber_publisher_core": "^7.0",
+    "drupal/uber_publisher_author_profile": "^7.0",
+    "drupal/uber_publisher_opinion_articles": "^7.0",
+    "drupal/uber_publisher_ads_system": "^7.0",
+    "drupal/uber_publisher_breaking_news": "^7.0",
     "drupal/uber_publisher_daily_cartoons": "6.x-dev",
-    "drupal/uber_publisher_in_pictures": "6.x-dev",
-    "drupal/uber_publisher_search": "6.x-dev",
-    "drupal/uber_publisher_social_post": "6.x-dev"
+    "drupal/uber_publisher_in_pictures": "^7.0",
+    "drupal/uber_publisher_search": "^7.0",
+    "drupal/uber_publisher_social_post": "^7.0",
+    "drupal/uber_publisher_indepth": "^7.0",
+    "drupal/uber_publisher_video": "^7.0",
+    "bower-asset/objectfitpolyfill": "~2.0",
+    "bower-asset/chartjs": "2.7.*",
+    "bower-asset/c3": "0.4.*",
+    "bower-asset/d3": "3.5.*",
+    "npm-asset/masonry-layout": "~4.0",
+    "npm-asset/imagesloaded": "~4.0",
+    "npm-asset/dropzone": "~4.0",
+    "npm-asset/blazy": "~1.0",
+    "npm-asset/slick-carousel": "~1.0",
+    "npm-asset/ace-builds": "~1.0",
+    "swagger-api/swagger-ui": "~3.0"
   },
   "require-dev": {
-    "drupal/console": "~1.0",
-    "drush/drush": "~9.0",
-    "drupal/coder": "~8.0",
-    "drupal/drupal-extension": "~3.0",
-    "phing/phing": "~2.0",
+    "drupal/core-dev": "^8.8.0",
+    "drupal/console": "^1.0",
+    "drush/drush": "^9.0",
     "behat/behat": "~3.0",
-    "behat/mink": "~1.0",
-    "behat/mink-extension": "~2.0",
-    "behat/mink-goutte-driver": "~1.0",
-    "behat/mink-zombie-driver": "~1.0",
-    "behat/mink-selenium2-driver": "~1.0",
-    "behatch/contexts": "~3.0",
-    "emuse/behat-html-formatter": "^0.1.0"
+    "phing/phing": "~2.0",
+    "drupal/drupal-extension": "^3.2",
+    "emuse/behat-html-formatter": "^0.2.0"
   },
   "config": {
     "bin-dir": "bin/",
     "secure-http": false,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "drupal/core": "dist"
+    }
   },
   "autoload": {
     "psr-4": {
@@ -82,19 +92,25 @@
     }
   },
   "scripts": {
-    "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
+    "pre-install-cmd": [
+      "Varbase\\composer\\ScriptHandler::checkComposerVersion"
+    ],
+    "pre-update-cmd": [
+      "Varbase\\composer\\ScriptHandler::checkComposerVersion"
+    ],
     "post-install-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
       "Varbase\\composer\\ScriptHandler::removeGitDirectories",
-      "@composer drupal-scaffold"
+      "./bin/phing push"
     ],
     "post-update-cmd": [
       "Varbase\\composer\\ScriptHandler::createRequiredFiles",
-      "Varbase\\composer\\ScriptHandler::removeGitDirectories"
+      "Varbase\\composer\\ScriptHandler::removeGitDirectories",
+      "./bin/phing push"
     ],
     "post-drupal-scaffold-cmd": [
       "Varbase\\composer\\ScriptHandler::postDrupalScaffoldProcedure",
-      "UberPublisher\\composer\\ScriptHandler::postDrupalScaffoldSubProfileProcedure"
+      "UberPublisher\\composer\\UberPublisherScriptHandler::postDrupalScaffoldSubProfileProcedure"
     ]
   },
   "conflict": {
@@ -102,33 +118,92 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-8.x-6.x": "8.6.x-dev"
+      "7.0.x": "7.0.x-dev"
     },
     "installer-types": [
       "bower-asset",
       "npm-asset"
     ],
     "installer-paths": {
-      "docroot/core": ["drupal/core"],
-      "docroot/profiles/{$name}": ["type:drupal-profile"],
-      "docroot/modules/contrib/{$name}": ["type:drupal-module"],
-      "docroot/themes/contrib/{$name}": ["type:drupal-theme"],
-      "docroot/libraries/slick": ["npm-asset/slick-carousel"],
-      "docroot/libraries/ace": ["npm-asset/ace-builds"],
+      "docroot/core": [
+        "type:drupal-core"
+      ],
+      "docroot/profiles/{$name}": [
+        "type:drupal-profile"
+      ],
+      "docroot/modules/contrib/{$name}": [
+        "type:drupal-module"
+      ],
+      "docroot/themes/contrib/{$name}": [
+        "type:drupal-theme"
+      ],
+      "docroot/libraries/slick": [
+        "npm-asset/slick-carousel"
+      ],
+      "docroot/libraries/ace": [
+        "npm-asset/ace-builds"
+      ],
+      "docroot/libraries/masonry": [
+        "npm-asset/masonry-layout"
+      ],
       "docroot/libraries/{$name}": [
         "type:drupal-library",
         "type:bower-asset",
         "type:npm-asset"
       ],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
+      "docroot/modules/custom/{$name}": [
+        "type:drupal-custom-module"
+      ],
+      "docroot/themes/custom/{$name}": [
+        "type:drupal-custom-theme"
+      ],
+      "drush/contrib/{$name}": [
+        "type:drupal-drush"
+      ]
     },
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
-          {"name": "dropzone","package": "npm-asset/dropzone"},
-          {"name": "blazy", "package": "npm-asset/blazy"},
-          {"name": "slick", "package": "npm-asset/slick-carousel"},
-          {"name": "ace", "package": "npm-asset/ace-builds"}
+        {
+          "name": "dropzone",
+          "package": "npm-asset/dropzone"
+        },
+        {
+          "name": "blazy",
+          "package": "npm-asset/blazy"
+        },
+        {
+          "name": "slick",
+          "package": "npm-asset/slick-carousel"
+        },
+        {
+          "name": "ace",
+          "package": "npm-asset/ace-builds"
+        },
+        {
+          "name": "chartjs",
+          "package": "bower-asset/chartjs"
+        },
+        {
+          "name": "c3",
+          "package": "bower-asset/c3"
+        },
+        {
+          "name": "d3",
+          "package": "bower-asset/d3"
+        },
+        {
+          "name": "masonry",
+          "package": "npm-asset/masonry-layout"
+        },
+        {
+          "name": "imagesloaded",
+          "package": "npm-asset/imagesloaded"
+        },
+        {
+          "name": "swagger-ui",
+          "package": "swagger-api/swagger-ui"
+        }
       ]
     },
     "enable-patching": true,
@@ -141,9 +216,35 @@
         "Issue #2912129: Fix embed YouTube, Twitter & Instagram?":
         "https://www.drupal.org/files/issues/twitter_instagram_table_picture_transformer-2912129-7.patch"
       },
-      "drupal/facets": {
-        "Issue #2692027: Have All link in facets":
-        "https://www.drupal.org/files/issues/2018-06-09/2692027-78.patch"
+      "drupal/vartheme_claro": {
+        "Issue #3134364 Enhancements on the content types forms fields":
+        "https://www.drupal.org/files/issues/2020-06-02/enhancments_on_the_content_types_forms_fields_8_0.patch",
+        "Issue #3145615 Media library Insert selected button has no attr that behat can Presses on":
+        "https://www.drupal.org/files/issues/2020-06-04/add_attr_to_button-3145615-7.patch"
+      },
+      "drupal/linkchecker": {
+        "Issue #3118940 Route entity.linkcheckerlink.canonical does not exist":
+        "https://www.drupal.org/files/issues/2020-04-29/linkchecker-3118940-add-canonical-route.patch"
+      },
+      "drupal/media_library_edit": {
+        "Issue #3034205: Open in modal": "https://www.drupal.org/files/issues/2020-06-09/open-in-modal-3034205-36.patch"
+      },
+      "drupal/content_planner": {
+        "Issue #3129606 Access bypass in Kanban": "https://www.drupal.org/files/issues/2020-06-07/access_fix_bypass_in_Kanban-3129606-4.patch",
+        "Issue #3010615 Kanban Published to Draft workflow Issue": "https://www.drupal.org/files/issues/2020-05-06/kanban-published-to-draft-workflow-issue-3010615-16.patch",
+        "Issue #3091413 Extend Kanban Filter Form by Content Type filter": "https://www.drupal.org/files/issues/2020-05-06/add_content_type_filter-3091413-3.patch"
+      },
+      "drupal/simple_amp": {
+        "Issue #3134061: AMP Error - The tag 'amphead-placeholder' is disallowed":
+        "https://www.drupal.org/files/issues/2020-05-06/3134061-fix-amphead-placeholder-tag.patch"
+      },
+      "drupal/subpathauto": {
+        "Issue #2830425: Add option to ignore admin paths":
+        "https://www.drupal.org/files/issues/2020-05-06/2830425-20.patch"
+      },
+      "drupal/ctools": {
+        "Issue #Add Configure Filter functionality to block views configuration.":
+        "https://www.drupal.org/files/issues/2020-03-30/ctools-exposed-filter-block-config-2657060-111.patch"
       }
     }
   }
