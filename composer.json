@@ -245,9 +245,6 @@
         "Issue #3118940 Route entity.linkcheckerlink.canonical does not exist":
         "https://www.drupal.org/files/issues/2020-04-29/linkchecker-3118940-add-canonical-route.patch"
       },
-      "drupal/media_library_edit": {
-        "Issue #3034205: Open in modal": "https://www.drupal.org/files/issues/2020-06-09/open-in-modal-3034205-36.patch"
-      },
       "drupal/subpathauto": {
         "Issue #2830425: Add option to ignore admin paths":
         "https://www.drupal.org/files/issues/2020-05-06/2830425-20.patch"
