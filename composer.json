@@ -46,7 +46,7 @@
     "drupal/subpathauto": "^1.0",
     "drupal/facets": "^1.4",
     "lullabot/amp": "^1.1",
-    "drupal/media_library_edit": "^1.0",
+    "drupal/media_library_edit": "^2.0",
     "drupal/allowed_formats": "^1.2",
     "drupal/varbase_workflow": "^2.0",
     "drupal/varbase_youtube_import": "1.x-dev",
