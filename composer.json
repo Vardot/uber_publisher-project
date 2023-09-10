@@ -22,20 +22,21 @@
     "assets": {
       "type": "composer",
       "url": "https://asset-packagist.org"
-    },
-    "composer-patches": {
-      "type": "vcs",
-      "url": "https://github.com/vardot/composer-patches"
     }
   },
   "require": {
-    "composer/installers": "~1.0 || ~2.0",
-    "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
+    "composer/installers": "~2.0",
+    "oomphinc/composer-installers-extender": "~2.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal/core-composer-scaffold": "^8.8.0",
-    "drupal/core-project-message": "^8.8.0",
-    "vardot/varbase-updater": "~1.0",
-    "vardot/uber_publisher": "7.0.x-dev"
+    "drupal/core-composer-scaffold": "^9 || ^10",
+    "drupal/core-project-message": "^9 || ^10",
+    "webflo/drupal-finder": "~1.0",
+    "vardot/varbase-updater": "~2.0",
+    "vardot/uber_publisher": "9.0.x-dev"
+  },
+  "require-dev": {
+    "drupal/core-dev": "~9.0 || ~10.0",
+    "drush/drush": "~11.0"
   },
   "config": {
     "bin-dir": "bin/",
@@ -43,6 +44,15 @@
     "optimize-autoloader": true,
     "preferred-install": {
       "drupal/core": "dist"
+    },
+    "allow-plugins": {
+      "composer/installers": true,
+      "cweagans/composer-patches": true,
+      "oomphinc/composer-installers-extender": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-project-message": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "vardot/varbase-updater": true
     }
   },
   "scripts": {
@@ -67,10 +77,25 @@
   "extra": {
     "drupal-scaffold": {
       "allowed-packages": [
-        "drupal/core"
+        "drupal/core",
+        "vardot/varbase",
+        "vardot/uber_publisher"
       ],
+      "gitignore": true,
       "locations": {
-        "web-root": "docroot/"
+        "web-root": "./docroot"
+      },
+      "file-mapping": {
+        "[web-root]/sites/default/default.services.yml": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "docroot/core/assets/scaffold/files/default.services.yml"
+        },
+        "[web-root]/sites/default/default.settings.php": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "docroot/core/assets/scaffold/files/default.settings.php"
+        }
       }
     },
     "drupal-core-project-message": {
@@ -103,8 +128,6 @@
       "we will revert to using (cweagans/composer-patches) without this override."
     ],
     "branch-alias": {
-      "dev-7.0.x": "7.0.x-dev",
-      "dev-8.x-8.x": "8.8.x-dev",
       "dev-9.0.x-dev": "9.0.x-dev"
     },
     "installer-types": [
@@ -133,6 +156,7 @@
     "drupal-libraries": {
       "library-directory": "docroot/libraries",
       "libraries": [
+        {"name": "objectfitpolyfill", "package": "bower-asset/objectfitpolyfill"},
         {"name": "dropzone","package": "npm-asset/dropzone"},
         {"name": "blazy", "package": "npm-asset/blazy"},
         {"name": "slick", "package": "npm-asset/slick-carousel"},
@@ -150,6 +174,7 @@
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
       "drupal/core": "-p2"
-    }
+    },
+    "patches": {  }
   }
 }
