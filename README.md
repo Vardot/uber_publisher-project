@@ -11,7 +11,7 @@ Project template for [Uber Publisher distribution](http://www.drupal.org/project
 
 To install the most recent stable release of Uber Publisher 9.0.x run this command:
 ```
-composer create-project vardot/uber_publisher-project:~7 PROJECT_DIR_NAME --stability dev --no-interaction
+composer create-project vardot/uber_publisher-project:~9 PROJECT_DIR_NAME --stability dev --no-interaction
 ```
 
 
